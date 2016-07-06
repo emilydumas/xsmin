@@ -1,0 +1,107 @@
+% xsmin Beamer Theme by David Dumas <david@dumas.io>
+% a variant of the "Execushares" theme by Kenton Hamaluik
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage[none]{hyphenat}
+\usepackage{mathspec} % xelatex-specific
+
+\def\email{\@dblarg\beamer@email}
+\long\def\beamer@email[#1]#2{%
+ \def\insertemail{#2}
+ \def\beamer@shortemail{#1}}
+\email{}
+
+\definecolor{xsminColorfulBG}{RGB}{184,25,21}
+\definecolor{xsminDarkText}{RGB}{40,40,40}
+\definecolor{xsminAccent}{RGB}{230,108,48}
+\definecolor{xsminLightBG}{RGB}{255,255,235}
+\definecolor{xsminSecondaryText}{RGB}{100,100,100}
+
+% Adobe Source Pro fonts are available on google fonts
+%     Source Serif Pro: https://www.google.com/fonts/specimen/Source+Serif+Pro
+%     Source Sans Pro: https://www.google.com/fonts/specimen/Source+Sans+Pro
+%     Source Code Pro: https://www.google.com/fonts/specimen/Source+Code+Pro
+% or from Adobe
+%     Source Serif Pro: http://store1.adobe.com/cfusion/store/html/index.cfm?store=OLS-US&event=displayFontPackage&code=1966
+%     Source Sans Pro: http://store1.adobe.com/cfusion/store/html/index.cfm?event=displayFontPackage&code=1959
+%     Source Code Pro: http://store1.adobe.com/cfusion/store/html/index.cfm?store=OLS-US&event=displayFontPackage&code=1960
+\setmainfont{Source Serif Pro}
+\setsansfont{Source Sans Pro}
+\setmonofont{Source Code Pro}
+
+% set beamer fonts
+\setbeamercolor{structure}{fg=xsminAccent}
+\setbeamercolor{normal text}{fg=xsminDarkText}
+\setbeamercolor{block title example}{fg=xsminAccent}
+
+% set beamer colours
+\setbeamercolor{itemize item}{fg=xsminAccent}
+\setbeamercolor{enumerate item}{fg=xsminAccent}
+\setbeamercolor{alerted text}{fg=xsminAccent}
+\setbeamercolor{section in toc}{fg=xsminDarkText}
+
+% square bullets
+\setbeamertemplate{enumerate items}[square]
+\setbeamertemplate{itemize items}[square]
+
+% disable navigation
+\setbeamertemplate{navigation symbols}{}
+
+% we handle the title page manually
+\setbeamertemplate{title page}{}
+
+% we handle the frame title manually, just put a space there
+\setbeamertemplate{frametitle}{\vspace{1cm}}
+
+% disable "Figure:" in the captions
+\setbeamertemplate{caption}{\tiny\insertcaption}
+\setbeamertemplate{caption label separator}{}
+
+\newdimen\slidewidth % auxiliary dimension
+\newdimen\slideheight % auxiliary dimension
+\slidewidth=\the\paperwidth
+\slideheight=\the\paperheight
+
+% TODO: Make a "real" title slide template instead of drawing a title
+% slide over top of *whatever* appears on slide 1.
+%
+% The current system means it is impossible to make a presentation 
+% without a title slide!
+
+\setbeamertemplate{background}{
+	\begin{tikzpicture}
+		% set up the entire slide as the canvas
+		\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+
+		% the background
+		\fill[color=xsminLightBG] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+
+		% separate the drawing based on if we're the first (title) slide or not
+		\ifnum\thepage=1\relax
+			% TITLE SLIDE
+
+			% Filled box for title background
+			\fill[color=xsminColorfulBG] (0, 4cm) rectangle(\slidewidth,\slideheight);
+
+			% Title and subtitle
+			\node[anchor=south,text width=\slidewidth-1cm,inner xsep=0.5cm] at (0.5\slidewidth,4cm) {\color{xsminLightBG}\Huge\textbf{\inserttitle}};
+			\node[anchor=north east,text width=\slidewidth-1cm,align=right] at (\slidewidth-0.4cm,4cm) {\color{xsminDarkText}\tiny\insertsubtitle};
+
+                        % Author and institute
+			\node at (0.5\slidewidth,2.5cm) {\color{xsminDarkText}\LARGE\insertauthor};
+			\node at (0.5\slidewidth,1.7cm) {\color{xsminDarkText}\large\insertinstitute};
+
+			% add the date in the corner
+			\node[anchor=south east] at(\slidewidth,0cm) {\color{xsminSecondaryText}\tiny\insertdate};
+		\else
+			% NOT the title page
+			% Draw the title bar if a title has been set
+                        \ifx\beamer@frametitle\empty
+                        \else
+  			    \fill[color=xsminColorfulBG] (0, \slideheight-1.2cm) rectangle(\slidewidth,\slideheight);
+			    \node[anchor=north,text width=\slidewidth-1cm,inner xsep=0.5cm,inner ysep=0.25cm] at (0.5\slidewidth,\slideheight) {\color{xsminLightBG}\huge\textbf{\insertframetitle}};
+			\fi
+		\fi
+	\end{tikzpicture}
+}
+\makeatother

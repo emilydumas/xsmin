@@ -1,0 +1,143 @@
+\documentclass[12pt]{beamer}
+\usepackage{graphicx}
+\usepackage{eucal}
+
+\usetheme{xsmin}
+
+% OPTIONAL: CUSTOM COLORS
+% Color names should be more or less self-explanatory
+% Values shown here are the defaults in the style file
+%
+% \definecolor{xsminColorfulBG}{RGB}{184,25,21}
+% \definecolor{xsminDarkText}{RGB}{40,40,40}
+% \definecolor{xsminAccent}{RGB}{230,108,48}
+% \definecolor{xsminLightBG}{RGB}{255,255,235}
+% \definecolor{xsminSecondaryText}{RGB}{100,100,100}
+
+\date{July xx, 2016}
+\title{My Lecture Title}
+\author{Anne K. Example}
+\institute{University of XYZ}
+
+\theoremstyle{theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}{Lemma}
+
+\renewcommand{\SS}{\textsf{\textbf{S}}}
+\newcommand{\Z}{\textsf{\textbf{Z}}}
+\newcommand{\N}{\textsf{\textbf{N}}}
+\renewcommand{\C}{\textsf{\textbf{C}}}
+\newcommand{\R}{\textsf{\textbf{R}}}
+\newcommand{\Mod}{\mathsf{Mod}}
+
+% Fix an incompatibility between xelatex and href:
+%
+% To make an image which is also a hyperlink, it must be enclosed in
+% the xbox command.
+\newsavebox{\ximagebox}
+\newlength{\ximageheight}
+\newsavebox{\xglyphbox}
+\newlength{\xglyphheight}
+\newcommand{\xbox}[1]%
+   {\savebox{\ximagebox}{#1}%
+    \settoheight{\ximageheight}{\usebox{\ximagebox}}%
+    \savebox{\xglyphbox}{\char32}%
+    \settoheight{\xglyphheight}{\usebox{\xglyphbox}}%
+    \raisebox{\ximageheight}[0pt][0pt]{\raisebox{-\xglyphheight}[0pt][0pt]{%
+      \makebox[0pt][l]{\usebox{\xglyphbox}}}}%
+    \usebox{\ximagebox}%
+    \raisebox{0pt}[0pt][0pt]{\makebox[0pt][r]{\usebox{\xglyphbox}}}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\frametitle{A slide with a title}
+
+An itemized list:
+\begin{itemize}
+\item First
+\item Second
+\pause
+\item Third, after a pause
+\end{itemize}
+
+\vspace{1cm}
+
+An enumerated list:
+\begin{enumerate}
+\item Alpha
+\item Beta
+\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+
+A frame without a title.
+
+\vspace{1cm}
+
+Which also has \alert{highlighted} text.
+
+\vspace{1cm}
+
+{\Large And large text, too.}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+\begin{center}
+\href{http://example.com/}{\xbox{\includegraphics[width=\textwidth]{placeholder-image.png}}}\\
+{\tiny Graphic-only slide (image is a link)}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% CONTACT INFO SLIDE
+% TODO: Make this a proper template
+% 
+% Right now, we just copy and slightly modify the title slide code
+% from the beamer style file.
+
+\begin{frame}
+\begin{tikzpicture}[overlay, remember picture, shift={(current page.south west)}]
+%\draw (0,0) -- (\paperwidth, \paperheight);
+%\draw (0,\paperheight) -- (\paperwidth, 0);
+\fill[color=xsminColorfulBG] (0, 4cm) rectangle(\slidewidth,\slideheight);
+
+% draw the actual text
+\node[anchor=south,text width=\slidewidth-1cm,inner xsep=0.5cm] at (0.5\slidewidth,4cm) {\color{xsminLightBG}\Huge\textbf{Contact}};
+\node[anchor=north east,text width=\slidewidth-1cm,align=right] at (\slidewidth-0.4cm,4cm) {\color{xsminDarkText}\tiny\insertsubtitle};
+% \node[above] at(0.5\slidewidth,2.3cm) {\color{xsminDarkText}\tiny by};
+\node at (0.5\slidewidth,2.5cm)
+{\color{xsminDarkText}\LARGE{Speaker Name Herre}};
+\node at (0.5\slidewidth,1.7cm) {\color{xsminDarkText}\large{contact@email.address}};
+\end{tikzpicture}
+\end{frame}
+
+\end{document}
+
+%%% Local Variables: 
+%%% coding: utf-8
+%%% mode: latex
+%%% TeX-engine: xetex
+%%% End: 
