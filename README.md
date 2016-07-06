@@ -1,5 +1,5 @@
-xsmin: Minimalist Beamer Template
-=================================
+xsmin: A Minimalist Beamer Theme
+================================
 
 This is a beamer template derived from "Execushares" by Kenton
 Hamaluik (http://hamaluik.com/posts/better-beamer-themes/).  Many
@@ -39,7 +39,7 @@ and add the command
 
 `\usetheme{xsmin}`
 
-to your document preamble.  Then copy `beamerthemexsmin.sty` to the
+to your document preamble.  Also copy `beamerthemexsmin.sty` to the
 directory containing your tex file, or place this style file in the
 xelatex search path.
 
