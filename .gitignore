@@ -11,6 +11,9 @@
 *.cb
 *.cb2
 
+# Backup files:
+*~
+
 ## Intermediate documents:
 *.dvi
 *-converted-to.*
